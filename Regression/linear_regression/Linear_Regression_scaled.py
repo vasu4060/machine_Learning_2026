@@ -11,6 +11,8 @@ from sklearn.linear_model import LinearRegression,Ridge,Lasso
 
 from sklearn.metrics import r2_score,mean_squared_error
 
+import matplotlib.pyplot as plt
+
 
 df = yf.download("GOOGL", start="2010-01-01")
 print(df.head())
@@ -79,3 +81,10 @@ for name,metrics in results.items():
 
 
 
+plt.plot(y_test.values, label="Actual Price")
+plt.plot(y_pred_scaled, label="Predicted Price")
+plt.xlabel("Time")
+plt.ylabel("Closing Price")
+plt.title("Actual vs Predicted Closing Price (Test Set)")
+plt.legend()
+plt.show()
