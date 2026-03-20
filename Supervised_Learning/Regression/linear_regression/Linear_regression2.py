@@ -1,7 +1,7 @@
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error, explained_variance_score,classification_report, confusion_matrix,precision_score,recall_score,accuracy_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error, explained_variance_score
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 import pandas as pd
