@@ -19,7 +19,7 @@ X, y = make_blobs(
 # 2. Visualize generated data (unlabeled)
 plt.scatter(X[:, 0], X[:, 1], s=50)
 plt.title("Synthetic Blob Data")
-plt.show()
+#plt.show()
 
 def euclidean_distance(a,b):          
          return np.linalg.norm(a - b)
@@ -38,11 +38,34 @@ for i in range(len(X)):
                     dist = round(euclidean_distance(X[i],X[j]),4)
                     euclidean.append((i,j,dist))
                     if min_distance > dist :
+                           
                            min_distance = dist
                            closest_pair = (i,j)
 
 cluster.append(closest_pair)
 
 
+clusters = [[i] for i in range(len(X))]
 
-print(euclidean, min_distance, closest_pair,cluster)
+clusters[min(closest_pair[0], closest_pair[1])].extend(clusters[max(closest_pair[0], closest_pair[1])])
+clusters.pop(max(closest_pair[0], closest_pair[1])) 
+
+min_distance2 = float('inf')
+
+closest_cluster = []
+for cluster1 in clusters:
+       for cluster2 in clusters:
+              if cluster1 > cluster2:
+                     for point1 in cluster1:
+                            for point2 in cluster2:
+                                   
+                                        dist = round(euclidean_distance(X[point1],X[point2]),4)
+                                        if dist < min_distance2 :
+                                            min_distance2 = dist
+                                           
+                                            closest_cluster = (cluster1,cluster2)
+
+index1 = clusters.index(cluster1)
+index2 = clusters.index(cluster2)
+clusters[index1].extend(clusters[index2])
+clusters.pop(index2)
